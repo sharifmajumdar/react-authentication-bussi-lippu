@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import Nav from "./components/Nav/Nav";
 import Home from "./components/Home/Home";
 import Contact from "./components/Contact/Contact";
@@ -39,8 +40,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/order" element={<Order />} />
             <Route path="/login" element={<Login />} />
-            <Route>
-              <PrivateRoute path="/shipment" element={<Shipment />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/shipment" element={<Shipment />} />
             </Route>
             <Route path="*" element={<NoMatch />} />
           </Routes>
