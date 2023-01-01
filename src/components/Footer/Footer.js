@@ -17,7 +17,7 @@ const Footer = () => {
                             <hr />
                             <div><Link to="/" style={{textDecoration: "none"}}>Home</Link></div>
                             <div><Link to="/services" style={{textDecoration: "none"}}>Services</Link></div>
-                            <div><Link to="/blog" style={{textDecoration: "none"}}>Blog</Link></div>
+                            <div><Link to="/order" style={{textDecoration: "none"}}>Order Review</Link></div>
                             <div><Link to="/contact" style={{textDecoration: "none"}}>Contact</Link></div>
                         </div>
                         <div className='col-md-4'>

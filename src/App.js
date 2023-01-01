@@ -17,7 +17,9 @@ import {
   Route
 } from "react-router-dom";
 import { useState, useEffect, createContext } from 'react';
+//import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 export const BusContext = createContext();
 
@@ -40,9 +42,17 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/order" element={<Order />} />
             <Route path="/login" element={<Login />} />
-            <Route element={<PrivateRoute />}>
+{/*             <Route element={<PrivateRoute />}>
               <Route path="/shipment" element={<Shipment />} />
-            </Route>
+            </Route> */}
+            <Route
+              path='/shipment'
+              element={
+                <ProtectedRoute>
+                  <Shipment />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NoMatch />} />
           </Routes>
           <Footer></Footer>

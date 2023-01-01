@@ -1,12 +1,16 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
 import { BusContext } from '../../App';
 
-const PrivateRoute = ({children, ...rest}) => {
+const PrivateRoute = ({children}) => {
     const [loggedInUser] = useContext(BusContext);
+    const navigate = useNavigate();
+    const location = useLocation();
     return (
-        loggedInUser.email ? <Outlet /> : <Navigate to='/login' />
+        loggedInUser.email ? 
+            children : 
+            navigate('/login', { state: { from: location} })        
     );
 };
 

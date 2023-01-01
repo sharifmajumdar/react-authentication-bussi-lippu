@@ -5,24 +5,26 @@ import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../uti
 import Data from '../../data/Data.json';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import Cart from '../Cart/Cart';
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointer } from '@fortawesome/free-solid-svg-icons';
 
 const Order = () => {
     const [cart, setCart] = useState([]);
     const [orderPlaced, setOrderPlaced] = useState(false);
+    const [isProceedCheckout, setIsProceedCheckout] = useState(false);
     const navigate = useNavigate();
 
     //This section handle the placing of order and free the cart 
-/*     const handlePlaceOrder = () => {
+    const handlePlaceOrder = () => {
         setCart([]);
         setOrderPlaced(true);
         processOrder();
-    } */
+        const confirmMessage = 'Order Placed!';
+        return confirmMessage;
+    }
 
     const handleProceedCheckout = () => {
-        navigate('/shipment');
+        navigate('/shipment', { state: { emptyCart: () => handlePlaceOrder()} });
     }
 
     //Revome the unnecessay item and update the cart 
@@ -62,8 +64,7 @@ const Order = () => {
                         {
                             cart.length >=1 && orderPlaced === false?
                                 <button type="button" onClick={handleProceedCheckout} className='btn btn-primary place-button'>
-                                    <FontAwesomeIcon icon={faHandPointer} />
-                                    <Link style={{textDecoration: "none", color: "white"}}  to={`/order`}>Proceed Checkout</Link>
+                                    <FontAwesomeIcon icon={faHandPointer} /> Proceed Checkout
                                 </button>:null
                         }
                     </Cart>
