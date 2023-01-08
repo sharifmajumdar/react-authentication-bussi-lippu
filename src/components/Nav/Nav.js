@@ -17,7 +17,8 @@ const Nav = () => {
                     <div className="navbar-nav d-flex justify-content-around">
                         <Link className="nav-item nav-link active" to="/">Home</Link>
                         <Link className="nav-item nav-link" to="/services">Services</Link>
-                        <Link className="nav-item nav-link" to="/order">Order Review</Link>
+{/*                         <Link className="nav-item nav-link" to="/order">Order Review</Link> */}
+                        <Link className="nav-item nav-link" to="/destination">Destination</Link>
                         <Link className="nav-item nav-link" to="/contact">Contact</Link>
                         {
                             loggedInUser.email ?
@@ -32,7 +33,7 @@ const Nav = () => {
                                     </li>
                                 </ul>
                                 :
-                                <Link className="nav-item nav-link btn btn-primary shadow" to="/login">Login</Link>
+                                <Link className="nav-item nav-link btn btn-info shadow text-white" to="/login">Login</Link>
                         }
                     </div>
                 </div>

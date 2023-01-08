@@ -1,4 +1,3 @@
-import React from 'react';
 import './Services.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointer } from '@fortawesome/free-solid-svg-icons';
@@ -28,7 +27,7 @@ const Services = (props) => {
             setPasses(Data);
         }, [passes]);
 
-        //Handling course orders and sending localstorage using keys
+        //Handling pass orders and sending localstorage using keys
         const addPassHandler = (pass) => {
             const newSelect = [...select, pass];
             setSelect(newSelect);
@@ -38,7 +37,7 @@ const Services = (props) => {
         }
     return (
         <div className='row'>
-            <div className="col-8">
+            <div className="col-lg-8 col-xs-12">
                 <h1 className='pass-item'>Available passes are:</h1><br />
                 {
                     passes && passes.map(pass => 
@@ -48,17 +47,17 @@ const Services = (props) => {
                         <small><b>Area:</b> {pass.area}</small><br />
                         <small><b>Duration:</b> {pass.duration}</small><br />         
                         <small><b>Price:</b> EUR{pass.price}</small><br />
-                        <button className='btn btn-primary'
+                        <button className='btn btn-info'
                             onClick={() => addPassHandler(pass) }>
                                 <FontAwesomeIcon icon={faHandPointer} /> Choose Pass</button>
                     </div>)
                 }
             </div>
-            <div className='col-4'>
+            <div className='col-lg-4 col-xs-12'>
                 <div>
                     <Cart cart = {select}>
                         <Link to="/order">
-                            <button className='btn btn-primary'>
+                            <button className='btn btn-info'>
                                             <FontAwesomeIcon icon={faHandPointer} /> Review Order</button>
                         </Link>
                     </Cart>

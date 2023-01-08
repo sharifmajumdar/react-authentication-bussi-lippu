@@ -1,11 +1,10 @@
 import './App.css';
-import React from 'react';
 import Nav from "./components/Nav/Nav";
 import Home from "./components/Home/Home";
 import Contact from "./components/Contact/Contact";
 import NoMatch from './components/NoMatch/NoMatch';
 import Services from './components/Services/Services';
-import Blog from './components/Blog/Blog';
+import Destination from './components/Destination/Destination';
 import Login from './components/Login/Login';
 import Shipment from './components/Shipment/Shipment';
 import Footer from './components/Footer/Footer';
@@ -16,12 +15,10 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import { useState, useEffect, createContext } from 'react';
-//import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import React, { useState, useEffect, createContext } from 'react';
+import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
 
-export const BusContext = createContext();
+export const BusContext = createContext(); // Creating a contex API to share data among other components
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -38,21 +35,13 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/blog" element={<Blog />} />
+            <Route path="/destination" element={<Destination />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/order" element={<Order />} />
             <Route path="/login" element={<Login />} />
-{/*             <Route element={<PrivateRoute />}>
-              <Route path="/shipment" element={<Shipment />} />
-            </Route> */}
-            <Route
-              path='/shipment'
-              element={
-                <ProtectedRoute>
-                  <Shipment />
-                </ProtectedRoute>
-              }
-            />
+            <Route element={<PrivateRoutes />}>
+              <Route element={<Shipment />} path="/shipment" />
+            </Route>
             <Route path="*" element={<NoMatch />} />
           </Routes>
           <Footer></Footer>

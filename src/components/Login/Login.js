@@ -1,11 +1,9 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { BusContext } from '../../App';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, handleFacebookSignIn, handleGoogleSignIn, handleSignOut, initializeLoginFramewrok, signInWithEmailAndPassword } from './loginManagers';
+import { createUserWithEmailAndPassword, handleFacebookSignIn, handleGoogleSignIn, initializeLoginFramewrok, signInWithEmailAndPassword } from './loginManagers';
 
 
 const Login = () => {
@@ -20,11 +18,10 @@ const Login = () => {
         success: false
     });
     initializeLoginFramewrok();
-    const [loggedInUser, setLoggedInUser] = useContext(BusContext);
+    const [setLoggedInUser] = useContext(BusContext);
     const navigate = useNavigate();
     const location = useLocation();
-    //const { from } = location.state;
-    const from  = location.state?.from?.pathname || '/';
+    const from  = location.state?.from?.pathname || '/'; // Reading location state to redirect after login
 
     const googleSignIn = () => {
         handleGoogleSignIn()
@@ -40,24 +37,22 @@ const Login = () => {
         })
     }
 
-    const signOut = () => {
+/*     const signOut = () => {
         handleSignOut()
         .then(res => {
             setUser(res);
             setLoggedInUser(res);
             navigate("/", { replace: true });
         })
-    }
+    } */
 
     const handleResponse = (res, redirect) => {
         setUser(res);
         setLoggedInUser(res);
-        /* if(location.state?.from){
-            navigate(location.state.from);
-        }  */
         redirect && navigate(from, {replace: true});
     }
 
+    // This function works for validating the input data especially for email and password format
     const handleBlur = (e) => {
         let isFormValid = true;
         if (e.target.name === "email") {
@@ -102,20 +97,6 @@ const Login = () => {
                         <div className='col-md-12 d-flex flex-column align-items-center mt-5'>
                             <h1>Login Credential</h1>
                             <hr />
-{/*                             {
-                                !user.isSignIn ? <button onClick={signOut}>Sign Out</button> :
-                                <button onClick={googleSignIn}>Sign In using Google</button>
-                            }
-                            <br />
-                            <button onClick={fbSignIn}>Sign In using Facebook</button> */}
-{/*                             {
-                                user.isSignIn && <div>
-                                    <p>Welcome, {user.name}!</p>
-                                    <p>Your Email: {user.email}</p>
-                                    <img src={user.photo} alt="" />
-                                    <p></p>
-                                </div>
-                            } */}
                             <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
                             <label htmlFor="newUser">New User Sign up</label>
                             <form onSubmit={handleSubmit}>
@@ -138,7 +119,7 @@ const Login = () => {
                                     <input type="submit" value={newUser ? 'Sign up' : 'Sign in'} />
                                 </div>
                             </form>
-                            Or
+                            <span>Or</span> 
                             <button style={buttonStyle} onClick={googleSignIn}>
                                 <FontAwesomeIcon icon={faFacebook} />Sign In using Google</button> <br />
                             <button style={buttonStyle} onClick={fbSignIn}>
@@ -146,8 +127,6 @@ const Login = () => {
 
                             <p style={{ color: 'red' }}>{user.error}</p>
                             {user.success && <p style={{ color: 'green' }}>User {newUser ? 'created' : 'logged in'} successfully</p>}
-{/*                             <button onClick={handleGoogleSignIn}>Sign in using Google</button>
-                            <button onClick={handleFacebookSignIn}>Sign in using Facebook</button> */}
                         </div>
                     </div>
                 </div>

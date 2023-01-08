@@ -1,7 +1,9 @@
+// This component represents the firebase related tasks
 import firebase from 'firebase/compat/app';
 import "firebase/compat/auth";
 import firebaseConfig from './firebase.config';
 
+// This function ensure the firebase initialization
 export const initializeLoginFramewrok = () => {
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
@@ -11,6 +13,7 @@ export const initializeLoginFramewrok = () => {
     }
 }
 
+// This function handle the login form using google account
 export const handleGoogleSignIn = () => {
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     return firebase.auth()
@@ -25,36 +28,34 @@ export const handleGoogleSignIn = () => {
                 success: true
             };
             return signedInUser;
-/*             const credential = result.credential;
-            const token = credential.accessToken;
-            const user = result.user;
-            setUser(user); */
         }).catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.Message;
-            const errorEmail = error.email;
-            const credential = error.credential;
+            //const errorCode = error.code;
+            //const errorMessage = error.Message;
+            //const errorEmail = error.email;
+            //const credential = error.credential;
         });
 }
 
+// This function handle the login form using facebook account
 export const handleFacebookSignIn = () => {
     const fbProvider = new firebase.auth.FacebookAuthProvider();
     return firebase.auth()
         .signInWithPopup(fbProvider)
         .then((result) => {
-            const credential = result.credential;
-            const accessToken = credential.accessToken;
+            //const credential = result.credential;
+            //const accessToken = credential.accessToken;
             const user = result.user;
             user.success = true;
             return user;
         }).catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.Message;
-            const errorEmail = error.email;
-            const credential = error.credential;
+            //const errorCode = error.code;
+            //const errorMessage = error.Message;
+            //const errorEmail = error.email;
+            //onst credential = error.credential;
         });
 }
 
+// This function handle the log out action
 export const handleSignOut = () => {
     return firebase.auth().signOut()
     .then(res => {
@@ -72,6 +73,7 @@ export const handleSignOut = () => {
     });
 }
 
+// This function works for creating a new account using name, email and password
 export const createUserWithEmailAndPassword = (name, email, password) => {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(res => {
@@ -89,6 +91,7 @@ export const createUserWithEmailAndPassword = (name, email, password) => {
     });
 }
 
+//This function represents the regular sign in matter using email and password
 export const signInWithEmailAndPassword = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password)
     .then(res => {

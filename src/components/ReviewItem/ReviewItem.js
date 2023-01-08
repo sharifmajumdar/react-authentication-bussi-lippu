@@ -7,13 +7,13 @@ const ReviewItem = (props) => {
         marginBottom: '5px',
         paddingBottom: '5px',
         paddingTop: '5px',
-        marginLeft: '250px',
+        marginLeft: '5px',
     }
     return (
         <div style={reviewStyle}>
-            <h4 style={{color: 'blue'}}>Course Title: {title}</h4> 
+            <h4 style={{color: 'black'}}>Course Title: {title}</h4> 
             <h6>Regular Price: {price}</h6>
-            <button className='btn btn-primary'
+            <button className='btn btn-info'
                 onClick={() => props.removePass(key)}>Remove Item</button>
         </div>
     );
